@@ -9,7 +9,7 @@ export let options = {
         { duration: "60s", target: 0 }
     ],
     thresholds: {
-        http_req_duration: ["p(95)<500"]
+        http_req_duration: ["p(95)<100"]
     },
     ext: {
         loadimpact: {
