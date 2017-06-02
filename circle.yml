@@ -11,9 +11,5 @@ dependencies:
       fi
 
 test:
-  pre:
-    - ./authorize_aws_security_group.sh
   override:
     - ~/k6-bin/k6 run -o cloud loadtests/main.js
-  post:
-    - ./revoke_aws_security_group.sh
