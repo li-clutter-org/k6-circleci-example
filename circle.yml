@@ -5,9 +5,8 @@ dependencies:
     - mkdir -p ~/k6-bin
     - |
       if [[ ! -f ~/k6-bin/k6 ]]; then
-        curl -O -L https://github.com/loadimpact/k6/releases/download/v0.15.0/k6-v0.15.0-linux64.tar.gz;
-        tar -xvzf k6-v0.15.0-linux64.tar.gz;
-        mv k6-v0.15.0-linux64/k6 ~/k6-bin/k6;
+        VERSION=0.18.0
+        curl -sL https://github.com/loadimpact/k6/releases/download/v${VERSION}/k6-v${VERSION}-linux64.tar.gz | tar xz --strip-components 1 -C ~/k6-bin 
       fi
 
 test:
