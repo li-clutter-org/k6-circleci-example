@@ -3,9 +3,11 @@ jobs:
   build:
     docker: 
       - image: circleci/node:10-browsers
-      - image: loadimpact/k6:0.25.1
     steps:
       - checkout
+      - run:
+          name: Download k6 image
+          command: docker pull loadimpact/k6:0.25.1
       - run:
           name: Run load test
           command: docker run -i -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -v ~/k6-circleci-example:/k6 loadimpact/k6 run -q -o cloud /k6/loadtests/main.js
