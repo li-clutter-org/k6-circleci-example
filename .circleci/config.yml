@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker: 
-      - image: circleci/node:4.8.2
+      - image: circleci/node:10-browsers
       - image: loadimpact/k6:0.25.1
     steps:
       - checkout
