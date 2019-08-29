@@ -5,6 +5,7 @@ jobs:
       - image: circleci/node:10-browsers
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Download k6 image
           command: docker pull loadimpact/k6:0.25.1
