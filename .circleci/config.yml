@@ -1,12 +1,10 @@
 version: 2.1
 jobs:
-  build:
+  loadtest:
     machine:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
-  loadtest:
-    steps:
       - run:
           name: Download k6 image
           command: docker pull loadimpact/k6:0.25.1
@@ -17,5 +15,4 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build
       - loadtest
