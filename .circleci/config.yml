@@ -13,4 +13,7 @@ jobs:
           command: docker pull loadimpact/k6:0.25.1
       - run:
           name: Run load test
+          command: docker run -i -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -v /home/circleci/project:/k6 loadimpact/k6:0.25.1 run -q -o cloud - <loadtests/main.js
+      - run:
+          name: Run load test
           command: docker run -i -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -v /home/circleci/project:/k6 loadimpact/k6:0.25.1 run -q -o cloud /k6/loadtests/main.js
