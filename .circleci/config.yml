@@ -5,4 +5,6 @@ jobs:
       - image: loadimpact/k6:0.25.1
     steps:
       - checkout
-      - run: k6 run -q -o cloud loadtests/main.js
+      - run:
+          name: Run load test
+          command: k6 run -q -o cloud loadtests/main.js
