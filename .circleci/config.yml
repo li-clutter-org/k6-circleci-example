@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run: pwd
       - run: ls -lh
       - run:
           name: Download k6 image
