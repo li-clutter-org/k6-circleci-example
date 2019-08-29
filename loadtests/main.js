@@ -12,6 +12,7 @@ export let options = {
         http_req_duration: ["p(95)<500"]
     },
     ext: {
+        projectID: __ENV.PROJECT_ID,
         loadimpact: {
             name: "test.loadimpact.com"
         }
