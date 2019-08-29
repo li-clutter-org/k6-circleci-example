@@ -1,8 +1,8 @@
 version: 2.1
 jobs:
   build:
-    docker: 
-      - image: circleci/node:10-browsers
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - setup_remote_docker
@@ -11,4 +11,4 @@ jobs:
           command: docker pull loadimpact/k6:0.25.1
       - run:
           name: Run load test
-          command: docker run -i -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -v /home/circleci/project/:/k6/ loadimpact/k6:0.25.1 run -q -e PROJECT_ID=$LI_PROJECT_ID -o cloud /k6/loadtests/api.js
+          command: docker run -i -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -v /home/circleci/project/:/ci/ loadimpact/k6:0.25.1 run -q -e PROJECT_ID=$LI_PROJECT_ID -o cloud /ci/loadtests/api.js
