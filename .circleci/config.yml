@@ -1,13 +1,20 @@
 version: 2.1
 jobs:
-  loadtest:
+  build:
     machine:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
+  loadtest:
+    steps:
       - run:
           name: Download k6 image
           command: docker pull loadimpact/k6:0.25.1
       - run:
           name: Run load test
           command: docker run -i -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -v /home/circleci/project/:/ci/ loadimpact/k6:0.25.1 run -q -e PROJECT_ID=$LI_PROJECT_ID -o cloud /ci/loadtests/api.js
+workflows:
+  version: 2
+  jobs:
+    - build
+    - loadtest
