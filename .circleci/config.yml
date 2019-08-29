@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run: ls -lh
       - run:
           name: Download k6 image
           command: docker pull loadimpact/k6:0.25.1
