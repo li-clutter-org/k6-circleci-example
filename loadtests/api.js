@@ -11,7 +11,7 @@ export const options = {
         { duration: "10s", target: 0 }
     ],
     thresholds: {
-        "http_req_duration": ['p(95)<100', 'p(99)<1500'],
+        "http_req_duration": ['p(95)<80', 'p(99)<1500'],
         "http_req_duration{name:PublicCrocs}": ['avg<400'],
         "http_req_duration{name:Create}": ['avg<600', 'max<1000'],
     },
