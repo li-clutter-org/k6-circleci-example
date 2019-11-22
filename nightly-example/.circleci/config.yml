@@ -1,30 +1,25 @@
 default: &defaults
   parallelism: 1
-  docker:
-    - image: loadimpact/k6:latest
+  working_directory: ~/my-project
 
 k6_performance_tests: &k6_performance_tests
   run:
-    name: Running Load Tests Using k6
+    name: Running k6 tests
     command: |
-      k6 run loadtests/performance-test.js
+      docker pull loadimpact/k6:latest
+      docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
+
 version: 2
 jobs:
   run_perfomance_tests:
     <<: *defaults
+    machine: true
     steps:
       - checkout
       - *k6_performance_tests
 
 workflows:
   version: 2
-  test-workflow:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - develop
+  build-and-test:
     jobs:
       - run_perfomance_tests

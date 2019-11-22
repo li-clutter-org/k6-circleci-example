@@ -1,18 +1,19 @@
 default: &defaults
   parallelism: 1
-  docker:
-    ## Install the latest k6 Docker image (`master` branch)
-    - image: loadimpact/k6:latest
+  working_directory: ~/my-project
 
 k6_performance_tests: &k6_performance_tests
   run:
-    name: Running k6 Cloud Tests
+    name: Running k6 tests
     command: |
-      k6 cloud loadtests/performance-test.js
+      docker pull loadimpact/k6:latest
+      docker run -i -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -v $HOME/my-project:/ci/ loadimpact/k6:latest cloud /ci/loadtests/performance-test.js
+
 version: 2
 jobs:
   run_perfomance_tests:
     <<: *defaults
+    machine: true
     steps:
       - checkout
       - *k6_performance_tests
