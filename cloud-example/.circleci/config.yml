@@ -11,7 +11,7 @@ k6_performance_tests: &k6_performance_tests
 
 version: 2
 jobs:
-  run_perfomance_tests:
+  run_performance_tests:
     <<: *defaults
     machine: true
     steps:
@@ -22,4 +22,4 @@ workflows:
   version: 2
   build-and-test:
     jobs:
-      - run_perfomance_tests
+      - run_performance_tests
