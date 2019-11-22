@@ -1,0 +1,24 @@
+default: &defaults
+  parallelism: 1
+  docker:
+    ## Install the latest k6 Docker image (`master` branch)
+    - image: loadimpact/k6:latest
+
+k6_performance_tests: &k6_performance_tests
+  run:
+    name: Running Load Tests Using k6
+    command: |
+      k6 run loadtests/performance-test.js
+version: 2
+jobs:
+  run_perfomance_tests:
+    <<: *defaults
+    steps:
+      - checkout
+      - *k6_performance_tests
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - run_perfomance_tests
