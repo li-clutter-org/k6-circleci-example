@@ -20,6 +20,16 @@ jobs:
 
 workflows:
   version: 2
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - run_performance_tests
   build-and-test:
     jobs:
       - run_performance_tests
