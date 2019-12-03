@@ -7,7 +7,7 @@
 ###########################################################################
 
 # Exit on error
-set -e
+set -ex
 
 if [ -z "$AWS_SECURITY_GROUP_ID" ];
 then
@@ -19,4 +19,4 @@ public_ip_address=$(curl -q http://checkip.amazonaws.com)
 echo "This computers public ip address is $public_ip_address"
 
 # Grant access to public IP of this machine
-aws ec2 authorize-security-group-ingress --region eu-west-1 --group-id $AWS_SECURITY_GROUP_ID --ip-permissions "[{\"IpProtocol\": \"tcp\", \"FromPort\": 443, \"ToPort\": 443, \"IpRanges\": [{\"CidrIp\": \"${public_ip_address}/32\"}]}]"
+/root/bin/aws ec2 authorize-security-group-ingress --group-id $AWS_SECURITY_GROUP_ID --ip-permissions "[{\"IpProtocol\": \"tcp\", \"FromPort\": 443, \"ToPort\": 443, \"IpRanges\": [{\"CidrIp\": \"${public_ip_address}/32\"}]}]"
