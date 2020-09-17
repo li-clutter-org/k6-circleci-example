@@ -3,3 +3,5 @@ This is an example repo for how to setup k6 with CircleCI to build load testing 
 
 The full guide describing how to use this repository is located at:
 https://blog.loadimpact.com/integrating-load-testing-with-circleci
+
+For latest updates, please visit https://github.com/k6io/example-circleci.
