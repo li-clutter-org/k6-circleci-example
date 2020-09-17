@@ -6,16 +6,13 @@ k6_performance_tests: &k6_performance_tests
   run:
     name: Running k6 tests
     command: |
-      # Download the k6 docker image. Alternatively, download the k6 release binary
       docker pull loadimpact/k6:latest
-      # Mount a volume to access the folder and run the test
-      docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
+      docker run -i -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v $HOME/my-project:/ci/ loadimpact/k6:latest cloud /ci/loadtests/performance-test.js
 
 version: 2
 jobs:
   run_performance_tests:
     <<: *defaults
-    # Use `machine` executor because the Docker executor cannot mount volumes
     machine: true
     steps:
       - checkout
